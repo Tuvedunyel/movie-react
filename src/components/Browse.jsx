@@ -1,5 +1,10 @@
+import Header from "../layout/Header"
+
 function Browse() {
-    return <h1>Browse</h1>
+    return <>
+        <Header />
+        <h1>Rechercher</h1>
+    </>
 }
 
 export default Browse

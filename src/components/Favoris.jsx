@@ -1,5 +1,12 @@
+import Header from "../layout/Header";
+
 function Favoris() {
-    return <h1>Favoris</h1>
+  return (
+    <>
+      <Header />
+      <h1>Favoris</h1>
+    </>
+  );
 }
 
-export default Favoris
+export default Favoris;

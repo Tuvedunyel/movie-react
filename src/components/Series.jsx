@@ -1,5 +1,12 @@
+import Header from "../layout/Header";
+
 function Series() {
-  return <h1>Séries</h1>;
+  return (
+    <>
+      <Header />
+      <h1>Séries</h1>
+    </>
+  );
 }
 
 export default Series;

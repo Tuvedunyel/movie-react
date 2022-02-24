@@ -1,6 +1,48 @@
 @use 'base';
 @use 'abstracts' as var;
+@use 'layout';
 
 body {
     font-family: var.$font-base;
+    color: var.$color-text-dark;
+    background: #1c2128;
+
+    a {
+        color: var.$color-text-dark;
+        text-decoration: none;
+    }
+
+}
+
+.films {
+    margin-top: 4em;
+    margin-bottom: 6em;
+
+    .container-films {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        column-gap: 1.5em;
+        row-gap: 2.5em;
+    }
+
+    .movie {
+        transform: scale(1);
+        cursor: pointer;
+        z-index: 0;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+            transform: scale(1.2);
+            z-index: 2;
+        }
+    }
+}
+
+.container-narrow {
+    max-width: 98%;
+    margin: 0 auto;
+}
+h2 {
+    text-transform: uppercase;
+    margin-bottom: 1em;
 }

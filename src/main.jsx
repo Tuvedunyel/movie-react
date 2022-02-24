@@ -5,19 +5,23 @@ import Browse from './components/Browse'
 import Favoris from './components/Favoris'
 import Movies from './components/Movies'
 import Series from './components/Series'
+import Header from './layout/Header'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Style from './sass/style.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="Nos séries" element={<Series />} />
-        <Route path="Nos films" element={<Movies />} />
-        <Route path="Ma liste" element={<Favoris />} />
-        <Route path="Rechercher" element={<Browse />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path='/' element={<App />} />
+          <Route path='/Series' element={<Series />} />
+          <Route path='/Films' element={<Movies />} />
+          <Route path='/Liste' element={<Favoris />} />
+          <Route path='/Rechercher' element={<Browse />} />
+        </Routes>
+      </Router>
+    </>
   </React.StrictMode>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);

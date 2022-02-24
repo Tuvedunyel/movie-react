@@ -1,0 +1,30 @@
+@use '../abstracts' as var;
+
+header {
+    margin-top: 2em;
+     border-bottom: 1px solid hsl(0 0% 100% / 0.2);
+}
+
+#main-menu {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+
+    a {
+        font-size: 1.5em;
+        transition: 0.3s;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 0.3em;
+
+        &:hover {
+            color: var.$color-hover;
+            text-decoration-color: var.$color-hover;
+        }
+    }
+}
+
+.container {
+    max-width: 85%;
+    margin: 0 auto;
+}
