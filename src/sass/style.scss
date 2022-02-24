@@ -1,0 +1,6 @@
+@use 'base';
+@use 'abstracts' as var;
+
+body {
+    font-family: var.$font-base;
+}
