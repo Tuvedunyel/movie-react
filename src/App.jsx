@@ -5,6 +5,7 @@ import axios from "axios";
 function App() {
   const [popular, setPopular] = useState([]);
   const [newMovies, setNewMovies] = useState([]);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -12,16 +13,16 @@ function App() {
         "https://api.themoviedb.org/3/movie/popular?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1"
       )
       .then(res => {
-        setPopular(res.data.results);
+        setPopular(res.data.results.slice(0, 20));
       });
       axios
         .get(
           "https://api.themoviedb.org/3/movie/upcoming?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1"
         )
         .then(res => {
-          setNewMovies(res.data.results);
+          setNewMovies(res.data.results.slice(0, 20));
         });
-  });
+  }, []);
 
   return (
     <>
@@ -50,14 +51,14 @@ function App() {
           <div className="container-films">
             {newMovies.slice(0, 7).map(movie => {
               return (
-                <div className="movie" key={movie.id}>
+                <div className="movie" onClick={ () => setMenuIsOpen(true) } key={movie.id}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}
                   />
                   <span className="screen-reader-text">{movie.title}</span>
                 </div>
-              );
+              )
             })}
           </div>
         </div>

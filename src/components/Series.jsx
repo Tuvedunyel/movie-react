@@ -4,7 +4,9 @@ function Series() {
   return (
     <>
       <Header />
-      <h1>Séries</h1>
+      <div className='container-narrow'>
+        <h1>Séries</h1>
+      </div>
     </>
   );
 }

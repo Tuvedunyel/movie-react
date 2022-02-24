@@ -4,7 +4,9 @@ function Favoris() {
   return (
     <>
       <Header />
-      <h1>Favoris</h1>
+      <div className='container-narrow'>
+        <h1>Favoris</h1>
+      </div>
     </>
   );
 }

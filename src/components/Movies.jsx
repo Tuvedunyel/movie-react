@@ -4,7 +4,9 @@ function Movies() {
   return (
     <>
       <Header />
-      <h1>Movies</h1>
+      <div className='container-narrow'>
+        <h1>Movies</h1>
+      </div>
     </>
   );
 }
