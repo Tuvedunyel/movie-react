@@ -1,12 +1,26 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Card from "./../layout/Card";
 import Header from "../layout/Header";
+import { motion } from "framer-motion";
 
 function Movies() {
   const [popular, setPopular] = useState([]);
   const [bestRated, setBestRated] = useState([]);
   const [upComing, setUpComing] = useState([]);
   const [onCinema, setOnCinema] = useState([]);
+
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+    },
+    out: {
+      opacity: 0,
+    },
+  };
 
   useEffect(() => {
     fetchApi(
@@ -42,7 +56,7 @@ function Movies() {
   };
 
   return (
-    <>
+    <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
       <Header />
       <div className='container-narrow'>
         <section title='Populaire' className='films'>
@@ -51,86 +65,50 @@ function Movies() {
             <div className='container-films'>
               {popular.map(movie => {
                 return (
-                  <div className='movie' key={movie.id}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title}
-                    />
-                    <span className='screen-reader-text'>{movie.title}</span>
-                    <div className='overview'>
-                      <p>{movie.overview}</p>
-                    </div>
-                  </div>
+                  <Card key={ movie.id } data={ movie } />
                 );
               })}
             </div>
           </div>
         </section>
-        <section title='Populaire' className='films'>
+        <section title='best-rated' className='films'>
           <div className='container-narrow'>
             <h2>Les films les mieux notés</h2>
             <div className='container-films'>
               {bestRated.map(movie => {
                 return (
-                  <div className='movie' key={movie.id}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title}
-                    />
-                    <span className='screen-reader-text'>{movie.title}</span>
-                    <div className='overview'>
-                      <p>{movie.overview}</p>
-                    </div>
-                  </div>
+                  <Card key={ movie.id } data={ movie } />
                 );
               })}
             </div>
           </div>
         </section>
-        <section title='Populaire' className='films'>
+        <section title='Prochainement' className='films'>
           <div className='container-narrow'>
             <h2>Les films à venir</h2>
             <div className='container-films'>
               {upComing.map(movie => {
                 return (
-                  <div className='movie' key={movie.id}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title}
-                    />
-                    <span className='screen-reader-text'>{movie.title}</span>
-                    <div className='overview'>
-                      <p>{movie.overview}</p>
-                    </div>
-                  </div>
+                  <Card key={ movie.id } data={ movie } />
                 );
               })}
             </div>
           </div>
         </section>
-        <section title='Populaire' className='films'>
+        <section title='Cinema' className='films'>
           <div className='container-narrow'>
             <h2>Les films actuellement au cinéma</h2>
             <div className='container-films'>
               {onCinema.map(movie => {
                 return (
-                  <div className='movie' key={movie.id}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title}
-                    />
-                    <span className='screen-reader-text'>{movie.title}</span>
-                    <div className='overview'>
-                      <p>{movie.overview}</p>
-                    </div>
-                  </div>
+                  <Card key={ movie.id } data={ movie } />
                 );
               })}
             </div>
           </div>
         </section>
       </div>
-    </>
+    </motion.div>
   );
 }
 

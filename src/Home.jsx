@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Header from "./layout/Header";
 import axios from "axios";
+import Card from "./layout/Card";
 
 function App() {
   const [popular, setPopular] = useState([]);
   const [series, setSeries] = useState([]);
+
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+    },
+    out: {
+      opacity: 0,
+    },
+  };
 
   useEffect(() => {
     fetchApi(
@@ -31,7 +45,7 @@ function App() {
   };
 
   return (
-    <>
+    <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
       <Header />
       <section title='Populaire' className='films'>
         <div className='container-narrow'>
@@ -39,13 +53,7 @@ function App() {
           <div className='container-films'>
             {popular.slice(0, 7).map(movie => {
               return (
-                <div className='movie' key={movie.id}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                  />
-                  <span className='screen-reader-text'>{movie.title}</span>
-                </div>
+                <Card key={movie.id} data={movie} />
               );
             })}
           </div>
@@ -57,19 +65,13 @@ function App() {
           <div className='container-films'>
             {series.slice(0, 7).map(serie => {
               return (
-                <div className='movie' key={serie.id}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`}
-                    alt={serie.title}
-                  />
-                  <span className='screen-reader-text'>{serie.title}</span>
-                </div>
+                <Card key={serie.id} data={serie} />
               );
             })}
           </div>
         </div>
       </section>
-    </>
+    </motion.div>
   );
 }
 
