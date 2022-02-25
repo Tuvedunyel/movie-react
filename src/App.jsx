@@ -1,28 +1,35 @@
 import { useState, useEffect } from "react";
 import Header from "./layout/Header";
 import axios from "axios";
+import Modal from "./components/Modal";
+import { useDispatch } from "react-redux";
+import { addMovie } from './features/movie'
 
 function App() {
   const [popular, setPopular] = useState([]);
-  const [newMovies, setNewMovies] = useState([]);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [series, setSeries] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1"
-      )
-      .then(res => {
-        setPopular(res.data.results.slice(0, 20));
-      });
-      axios
-        .get(
-          "https://api.themoviedb.org/3/movie/upcoming?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1"
-        )
-        .then(res => {
-          setNewMovies(res.data.results.slice(0, 20));
-        });
+      const moviePromise = Promise.resolve(fetchApi(
+        "https://api.themoviedb.org/3/movie/popular?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1", setPopular
+      ));
+
+      moviePromise.then((value) => { dispatch(addMovie(popular)) })
+
+      fetchApi(
+        "https://api.themoviedb.org/3/tv/popular?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1", setSeries
+      );
+      
+      axios.get()
   }, []);
+
+  const fetchApi = (api, setter) => {
+    axios.get(api).then(res => {
+      setter(res.data.results);
+    })
+  } 
+
 
   return (
     <>
@@ -47,18 +54,18 @@ function App() {
       </section>
       <section title="Nouveau sur le site" className="films a-venir">
         <div className="container-narrow">
-          <h2>À venir</h2>
+          <h2>Séries Populaire</h2>
           <div className="container-films">
-            {newMovies.slice(0, 7).map(movie => {
+            {series.slice(0, 7).map(serie => {
               return (
-                <div className="movie" onClick={ () => setMenuIsOpen(true) } key={movie.id}>
+                <div className='movie' key={serie.id}>
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
+                    src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`}
+                    alt={serie.title}
                   />
-                  <span className="screen-reader-text">{movie.title}</span>
+                  <span className='screen-reader-text'>{serie.title}</span>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
