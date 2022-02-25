@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Header from "./layout/Header";
 import axios from "axios";
 import Card from "./layout/Card";
+import InitialTransition from './transition/InitialTransition';
 
 function App() {
   const [popular, setPopular] = useState([]);
@@ -45,33 +46,37 @@ function App() {
   };
 
   return (
-    <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-      <Header />
-      <section title='Populaire' className='films'>
-        <div className='container-narrow'>
-          <h2>Films populaire</h2>
-          <div className='container-films'>
-            {popular.slice(0, 7).map(movie => {
-              return (
-                <Card key={movie.id} data={movie} />
-              );
-            })}
+    <>
+      <motion.div
+        initial='initial'
+        animate='in'
+        exit='out'
+        variants={pageVariants}
+      >
+        <Header />
+        <section title='Populaire' className='films'>
+          <div className='container-narrow'>
+            <h2>Films populaire</h2>
+            <div className='container-films'>
+              {popular.slice(0, 7).map(movie => {
+                return <Card key={movie.id} data={movie} />;
+              })}
+            </div>
           </div>
-        </div>
-      </section>
-      <section title='Nouveau sur le site' className='films a-venir'>
-        <div className='container-narrow'>
-          <h2>Séries Populaire</h2>
-          <div className='container-films'>
-            {series.slice(0, 7).map(serie => {
-              return (
-                <Card key={serie.id} data={serie} />
-              );
-            })}
+        </section>
+        <section title='Nouveau sur le site' className='films a-venir'>
+          <div className='container-narrow'>
+            <h2>Séries Populaire</h2>
+            <div className='container-films'>
+              {series.slice(0, 7).map(serie => {
+                return <Card key={serie.id} data={serie} />;
+              })}
+            </div>
           </div>
-        </div>
-      </section>
-    </motion.div>
+        </section>
+      </motion.div>
+      <InitialTransition />
+    </>
   );
 }
 

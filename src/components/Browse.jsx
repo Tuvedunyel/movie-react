@@ -8,6 +8,9 @@ function Browse() {
     },
     in: {
       opacity: 1,
+      transition: {
+        duration: 1.5,
+      },
     },
     out: {
       opacity: 0,

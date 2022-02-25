@@ -15,6 +15,9 @@ function Series() {
     },
     in: {
       opacity: 1,
+      transition: {
+        duration: 1.5,
+      },
     },
     out: {
       opacity: 0,
@@ -52,7 +55,12 @@ function Series() {
   };
 
   return (
-    <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
+    <motion.div
+      initial='initial'
+      animate='in'
+      exit='out'
+      variants={pageVariants}
+    >
       <Header />
       <div className='container-narrow'>
         <section title='Populaire' className='films'>
@@ -60,9 +68,7 @@ function Series() {
             <h2>Séries populaire</h2>
             <div className='container-films'>
               {popular.map(serie => {
-                return (
-                  <Card key={ serie.id } data={ serie } />
-                );
+                return <Card key={serie.id} data={serie} />;
               })}
             </div>
           </div>
@@ -72,9 +78,7 @@ function Series() {
             <h2>Séries les mieux notés</h2>
             <div className='container-films'>
               {bestRated.map(serie => {
-                return (
-                  <Card key={ serie.id } data={ serie } />
-                );
+                return <Card key={serie.id} data={serie} />;
               })}
             </div>
           </div>
@@ -84,9 +88,7 @@ function Series() {
             <h2>Actuellement à la télévision</h2>
             <div className='container-films'>
               {onAirShow.map(serie => {
-                return (
-                  <Card key={ serie.id } data={ serie } />
-                );
+                return <Card key={serie.id} data={serie} />;
               })}
             </div>
           </div>
