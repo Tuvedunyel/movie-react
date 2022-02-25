@@ -1,6 +1,6 @@
 import Header from "../layout/Header";
 
-function Favoris() {
+function Favoris(props) {
   return (
     <>
       <Header />

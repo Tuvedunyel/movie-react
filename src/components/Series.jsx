@@ -1,6 +1,6 @@
 import Header from "../layout/Header";
 
-function Series() {
+function Series(props) {
   return (
     <>
       <Header />
