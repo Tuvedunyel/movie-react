@@ -5,7 +5,7 @@ function Favoris(props) {
     <>
       <Header />
       <div className='container-narrow'>
-        <h1>Favoris</h1>
+        <h1>Ma liste</h1>
       </div>
     </>
   );

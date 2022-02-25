@@ -2,30 +2,31 @@ import { useState, useEffect } from "react";
 import Header from "./layout/Header";
 import axios from "axios";
 import Movies from "./components/Movies";
-import { useDispatch } from "react-redux";
-import { popularMovie } from "./features/movie";
 
 function App() {
   const [popular, setPopular] = useState([]);
   const [series, setSeries] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchApi(
       "https://api.themoviedb.org/3/movie/popular?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1",
-      setPopular
+      setPopular,
+      "popularMovies"
     );
-
-    dispatch(popularMovie(popular));
 
     fetchApi(
       "https://api.themoviedb.org/3/tv/popular?api_key=183f6d81ebab47463edff434c4c7625b&language=en-US&page=1",
-      setSeries
+      setSeries,
+      "popularSeries"
     );
   }, []);
 
-  const fetchApi = (api, setter) => {
+  const fetchApi = (api, setter, storeData) => {
+    if (localStorage.getItem(storeData)) {
+      setter(JSON.parse(localStorage.getItem(storeData)));
+    }
     axios.get(api).then(res => {
+      localStorage.setItem(storeData, JSON.stringify(res.data.results));
       setter(res.data.results);
     });
   };
@@ -69,7 +70,6 @@ function App() {
           </div>
         </div>
       </section>
-      <Movies />
     </>
   );
 }
