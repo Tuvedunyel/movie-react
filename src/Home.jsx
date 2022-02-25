@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./layout/Header";
 import axios from "axios";
-import Movies from "./components/Movies";
 
 function App() {
   const [popular, setPopular] = useState([]);

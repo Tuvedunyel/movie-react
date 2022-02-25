@@ -1,48 +1,76 @@
-@use 'base';
-@use 'abstracts' as var;
-@use 'layout';
+@use "base";
+@use "abstracts" as var;
+@use "layout";
 
 body {
-    font-family: var.$font-base;
+  font-family: var.$font-base;
+  color: var.$color-text-dark;
+  background: #1c2128;
+
+  a {
     color: var.$color-text-dark;
-    background: #1c2128;
-
-    a {
-        color: var.$color-text-dark;
-        text-decoration: none;
-    }
-
+    text-decoration: none;
+  }
 }
 
 .films {
-    margin-top: 4em;
-    margin-bottom: 6em;
+  margin-top: 4em;
+  margin-bottom: 6em;
 
-    .container-films {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        column-gap: 1.5em;
-        row-gap: 2.5em;
+  .container-films {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    column-gap: 1.5em;
+    row-gap: 2.5em;
+  }
+
+  .movie {
+    transform: scale(1);
+    cursor: pointer;
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+
+    &,
+    img {
+      border-radius: 2em;
     }
 
-    .movie {
-        transform: scale(1);
-        cursor: pointer;
-        z-index: 0;
-        transition: all 0.5s ease-in-out;
-
-        &:hover {
-            transform: scale(1.2);
-            z-index: 2;
-        }
+    .overview {
+      position: absolute;
+      padding: 1.5em 1em;
+      bottom: 0;
+      width: 100%;
+      border-radius: 2em;
+      background: transparent;
+      color: transparent;
+      font-size: 1.1rem;
+      transition: all 500ms ease-in-out;
+      opacity: 0;
     }
+
+    &:hover {
+      transform: scale(1.2);
+      z-index: 2;
+
+      .overview {
+        background: rgba(0, 28, 98, 0.6);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid transparent;
+        color: var.$color-text-dark;
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .container-narrow {
-    max-width: 98%;
-    margin: 0 auto;
+  max-width: 98%;
+  margin: 0 auto;
 }
 h2 {
-    text-transform: uppercase;
-    margin-bottom: 1em;
+  text-transform: uppercase;
+  margin-bottom: 1em;
 }
