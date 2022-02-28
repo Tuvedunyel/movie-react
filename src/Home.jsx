@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import Header from "./layout/Header";
 import axios from "axios";
 import Card from "./layout/Card";
+import Liste from "./components/Liste";
 import InitialTransition from './transition/InitialTransition';
 
 function App() {
   const [popular, setPopular] = useState([]);
   const [series, setSeries] = useState([]);
+  const [liste, setListe] = useState([]);
 
   const pageVariants = {
     initial: {
@@ -59,7 +61,7 @@ function App() {
             <h2>Films populaire</h2>
             <div className='container-films'>
               {popular.slice(0, 7).map(movie => {
-                return <Card key={movie.id} data={movie} />;
+                return <Card setListe={setListe} liste={liste} key={movie.id} data={movie} />;
               })}
             </div>
           </div>
@@ -70,6 +72,16 @@ function App() {
             <div className='container-films'>
               {series.slice(0, 7).map(serie => {
                 return <Card key={serie.id} data={serie} />;
+              })}
+            </div>
+          </div>
+        </section>
+        <section title='Ma liste' className='films a-venir'>
+          <div className='container-narrow'>
+            <h2>Ma liste</h2>
+            <div className='container-films'>
+              {liste.slice(0, 7).map(serie => {
+                return <Liste key={serie.id} liste={serie} data={liste} setListe={setListe} />;
               })}
             </div>
           </div>

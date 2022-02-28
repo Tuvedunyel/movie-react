@@ -24,7 +24,9 @@ function Card(props) {
                     tard
                   </p>
                 )}
-                <button className='liste-button'>Ajouter à ma liste</button>
+                <button onClick={ () => {
+                  props.setListe([...props.liste, props.data]);
+                } } className='liste-button'>Ajouter à ma liste</button>
               </div>
             </div>
           </div>
