@@ -4,7 +4,7 @@ import Header from "./layout/Header";
 import axios from "axios";
 import Card from "./layout/Card";
 import Liste from "./components/Liste";
-import InitialTransition from './transition/InitialTransition';
+import InitialTransition from "./transition/InitialTransition";
 
 function App() {
   const [popular, setPopular] = useState([]);
@@ -61,7 +61,14 @@ function App() {
             <h2>Films populaire</h2>
             <div className='container-films'>
               {popular.slice(0, 7).map(movie => {
-                return <Card setListe={setListe} liste={liste} key={movie.id} data={movie} />;
+                return (
+                  <Card
+                    setListe={setListe}
+                    liste={liste}
+                    key={movie.id}
+                    data={movie}
+                  />
+                );
               })}
             </div>
           </div>
@@ -71,7 +78,14 @@ function App() {
             <h2>Séries Populaire</h2>
             <div className='container-films'>
               {series.slice(0, 7).map(serie => {
-                return <Card key={serie.id} data={serie} />;
+                return (
+                  <Card
+                    key={serie.id}
+                    data={serie}
+                    setListe={setListe}
+                    liste={liste}
+                  />
+                );
               })}
             </div>
           </div>
@@ -80,8 +94,15 @@ function App() {
           <div className='container-narrow'>
             <h2>Ma liste</h2>
             <div className='container-films'>
-              {liste.slice(0, 7).map(serie => {
-                return <Liste key={serie.id} liste={serie} data={liste} setListe={setListe} />;
+              {liste.slice(0, 7).map(item => {
+                return (
+                  <Liste
+                    key={item.id}
+                    item={item}
+                    liste={liste}
+                    setListe={setListe}
+                  />
+                );
               })}
             </div>
           </div>

@@ -80,12 +80,12 @@ h2 {
 }
 
 .absolute {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  pointer-events: none;
+  z-index: 100;
 }
 .relative {
   position: relative;
@@ -127,7 +127,7 @@ h2 {
 }
 
 .darkbackground {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   background: hsl(0 0% 0% / 0.5);
