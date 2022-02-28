@@ -35,7 +35,16 @@ function App() {
       setSeries,
       "popularSeries"
     );
+
+    if (localStorage.getItem("liste")) {
+      setListe(JSON.parse(localStorage.getItem("liste")));
+    }
   }, []);
+
+  useEffect( () => {
+    localListe()
+
+  }, [liste])
 
   const fetchApi = (api, setter, storeData) => {
     if (localStorage.getItem(storeData)) {
@@ -45,6 +54,12 @@ function App() {
       localStorage.setItem(storeData, JSON.stringify(res.data.results));
       setter(res.data.results);
     });
+  };
+
+  const localListe = () => {
+    if (liste.length > 0) {
+      localStorage.setItem("liste", JSON.stringify(liste));
+    }
   };
 
   return (

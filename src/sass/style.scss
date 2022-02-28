@@ -86,6 +86,7 @@ h2 {
   align-items: flex-end;
   justify-content: center;
   z-index: 100;
+  pointer-events: none;
 }
 .relative {
   position: relative;
@@ -156,9 +157,12 @@ h2 {
 .imgContainer {
   width: 100%;
   max-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   img {
-    width: 100%;
+    border-radius: 2rem;
     max-height: 500px;
     object-fit: contain;
     object-position: center;

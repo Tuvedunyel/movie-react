@@ -1,7 +1,16 @@
 import { useState } from "react";
+import Button from './../components/Button';
 
 function Card(props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const addToListe = () => {
+    props.setListe([...props.liste, props.data]);
+  };
+
+  const removeFromListe = () => {
+    props.setListe([...props.liste.filter(item => item.id !== props.data.id)]);
+  }
 
   return (
     <>
@@ -24,9 +33,7 @@ function Card(props) {
                     tard
                   </p>
                 )}
-                <button onClick={ () => {
-                  props.setListe([...props.liste, props.data]);
-                } } className='liste-button'>Ajouter à ma liste</button>
+                <Button liste={props.liste} data={props.data} removeFromListe={removeFromListe} addToListe={addToListe} />
               </div>
             </div>
           </div>
