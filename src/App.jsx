@@ -15,7 +15,6 @@ function App() {
           <Route path='/Series' element={<Series />} />
           <Route path='/Films' element={<Movies />} />
           <Route path='/Liste' element={<Favoris/>} />
-          <Route path='/Rechercher' element={<Browse />} />
         </Routes>
       </AnimatePresence>
     </Router>

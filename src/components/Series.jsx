@@ -130,9 +130,9 @@ function Series() {
             </div>
           </div>
         </section>
-        <section title='Ma liste de série' className='films a-venir'>
+        <section title='Mes séries' className='films a-venir'>
           <div className='container-narrow'>
-            <h2>Ma liste de séries</h2>
+            <h2>Mes séries</h2>
             <div className='container-films'>
               {seriesListe.slice(0, 7).map(item => {
                 return (

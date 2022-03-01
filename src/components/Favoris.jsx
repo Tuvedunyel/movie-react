@@ -1,12 +1,14 @@
 import Header from "../layout/Header";
 import Liste from "./Liste";
 import SeriesListe from "./SeriesListe";
+import MoviesListe from "./MoviesListe";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion"
 
 function Favoris() {
   const [liste, setListe] = useState([]);
   const [seriesListe, setSeriesListe] = useState([]);
+  const [moviesListe, setMoviesListe] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("liste")) {
@@ -14,6 +16,9 @@ function Favoris() {
     }
     if (localStorage.getItem("seriesListe")) {
       setSeriesListe(JSON.parse(localStorage.getItem("seriesListe")));
+    }
+    if (localStorage.getItem("moviesListe")) {
+      setMoviesListe(JSON.parse(localStorage.getItem("moviesListe")));
     }
   }, [])
 
@@ -25,9 +30,18 @@ function Favoris() {
     localSeriesListe()
   }, [seriesListe])
 
+  useEffect( () => {
+    localMoviesListe()
+  }, [moviesListe])
+
   const localSeriesListe = () => {
     if (seriesListe.length > 0) {
       localStorage.setItem("seriesListe", JSON.stringify(seriesListe));
+    }
+  }
+  const localMoviesListe = () => {
+    if (moviesListe.length > 0) {
+      localStorage.setItem("moviesListe", JSON.stringify(moviesListe));
     }
   }
 
@@ -85,6 +99,23 @@ function Favoris() {
                     item={item}
                     seriesListe={seriesListe}
                     setSeriesListe={setSeriesListe}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      <section title='Mes films' className='films a-venir'>
+          <div className='container-narrow'>
+            <h2>Mes films</h2>
+            <div className='container-films'>
+              {moviesListe.map(item => {
+                return (
+                  <MoviesListe
+                    key={item.id}
+                    item={item}
+                    moviesListe={moviesListe}
+                    setMoviesListe={setMoviesListe}
                   />
                 );
               })}

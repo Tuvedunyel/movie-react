@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "./../layout/Card";
 import Header from "../layout/Header";
+import MoviesListe from "./MoviesListe";
 import { motion } from "framer-motion";
 
 function Movies() {
@@ -9,6 +10,7 @@ function Movies() {
   const [bestRated, setBestRated] = useState([]);
   const [upComing, setUpComing] = useState([]);
   const [onCinema, setOnCinema] = useState([]);
+  const [moviesListe, setMoviesListe] = useState([]);
 
   const pageVariants = {
     initial: {
@@ -18,7 +20,7 @@ function Movies() {
       opacity: 1,
       transition: {
         duration: 1.5,
-      }
+      },
     },
     out: {
       opacity: 0,
@@ -48,6 +50,16 @@ function Movies() {
     );
   }, []);
 
+  useEffect(() => {
+    localMoviesListe();
+  }, [moviesListe]);
+
+  const localMoviesListe = () => {
+    if (moviesListe.length > 0) {
+      localStorage.setItem("moviesListe", JSON.stringify(moviesListe));
+    }
+  };
+
   const fetchApi = (api, setter, storeData) => {
     if (localStorage.getItem(storeData)) {
       setter(JSON.parse(localStorage.getItem(storeData)));
@@ -59,7 +71,12 @@ function Movies() {
   };
 
   return (
-    <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
+    <motion.div
+      initial='initial'
+      animate='in'
+      exit='out'
+      variants={pageVariants}
+    >
       <Header />
       <div className='container-narrow'>
         <section title='Populaire' className='films'>
@@ -68,7 +85,12 @@ function Movies() {
             <div className='container-films'>
               {popular.map(movie => {
                 return (
-                  <Card key={ movie.id } data={ movie } />
+                  <Card
+                    key={movie.id}
+                    data={movie}
+                    liste={moviesListe}
+                    setListe={setMoviesListe}
+                  />
                 );
               })}
             </div>
@@ -80,7 +102,12 @@ function Movies() {
             <div className='container-films'>
               {bestRated.map(movie => {
                 return (
-                  <Card key={ movie.id } data={ movie } />
+                  <Card
+                    key={movie.id}
+                    data={movie}
+                    liste={moviesListe}
+                    setListe={setMoviesListe}
+                  />
                 );
               })}
             </div>
@@ -92,7 +119,12 @@ function Movies() {
             <div className='container-films'>
               {upComing.map(movie => {
                 return (
-                  <Card key={ movie.id } data={ movie } />
+                  <Card
+                    key={movie.id}
+                    data={movie}
+                    liste={moviesListe}
+                    setListe={setMoviesListe}
+                  />
                 );
               })}
             </div>
@@ -104,7 +136,29 @@ function Movies() {
             <div className='container-films'>
               {onCinema.map(movie => {
                 return (
-                  <Card key={ movie.id } data={ movie } />
+                  <Card
+                    key={movie.id}
+                    data={movie}
+                    liste={moviesListe}
+                    setListe={setMoviesListe}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </section>
+        <section title='Mes séries' className='films a-venir'>
+          <div className='container-narrow'>
+            <h2>Mes films</h2>
+            <div className='container-films'>
+              {moviesListe.slice(0, 7).map(item => {
+                return (
+                  <MoviesListe
+                    key={item.id}
+                    item={item}
+                    moviesListe={moviesListe}
+                    setMoviesListe={setMoviesListe}
+                  />
                 );
               })}
             </div>

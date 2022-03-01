@@ -18,9 +18,6 @@ function Header() {
               <li>
                 <Link to='/Liste'>Ma liste</Link>
               </li>
-              <li>
-                <Link to='/Rechercher'>Rechercher</Link>
-              </li>
             </ul>
           </nav>
           <Outlet />
