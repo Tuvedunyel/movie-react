@@ -3,11 +3,13 @@ import axios from "axios";
 import Card from "./../layout/Card";
 import Header from "../layout/Header";
 import { motion } from "framer-motion";
+import SeriesListe from "./SeriesListe";
 
 function Series() {
   const [popular, setPopular] = useState([]);
   const [bestRated, setBestRated] = useState([]);
   const [onAirShow, setOnAirShow] = useState([]);
+  const [seriesListe, setSeriesListe] = useState([]);
 
   const pageVariants = {
     initial: {
@@ -42,7 +44,15 @@ function Series() {
       setOnAirShow,
       "onAirShow"
     );
+
+    if (localStorage.getItem("seriesListe")) {
+      setSeriesListe(JSON.parse(localStorage.getItem("seriesListe")));
+    }
   }, []);
+
+  useEffect(() => {
+    localSeriesListe();
+  }, [seriesListe]);
 
   const fetchApi = (api, setter, storeData) => {
     if (localStorage.getItem(storeData)) {
@@ -52,6 +62,12 @@ function Series() {
       localStorage.setItem(storeData, JSON.stringify(res.data.results));
       setter(res.data.results);
     });
+  };
+
+  const localSeriesListe = () => {
+    if (seriesListe.length > 0) {
+      localStorage.setItem("seriesListe", JSON.stringify(seriesListe));
+    }
   };
 
   return (
@@ -68,7 +84,14 @@ function Series() {
             <h2>Séries populaire</h2>
             <div className='container-films'>
               {popular.map(serie => {
-                return <Card key={serie.id} data={serie} />;
+                return (
+                  <Card
+                    key={serie.id}
+                    data={serie}
+                    setListe={setSeriesListe}
+                    liste={seriesListe}
+                  />
+                );
               })}
             </div>
           </div>
@@ -78,7 +101,14 @@ function Series() {
             <h2>Séries les mieux notés</h2>
             <div className='container-films'>
               {bestRated.map(serie => {
-                return <Card key={serie.id} data={serie} />;
+                return (
+                  <Card
+                    key={serie.id}
+                    data={serie}
+                    setListe={setSeriesListe}
+                    liste={seriesListe}
+                  />
+                );
               })}
             </div>
           </div>
@@ -88,7 +118,31 @@ function Series() {
             <h2>Actuellement à la télévision</h2>
             <div className='container-films'>
               {onAirShow.map(serie => {
-                return <Card key={serie.id} data={serie} />;
+                return (
+                  <Card
+                    key={serie.id}
+                    data={serie}
+                    setListe={setSeriesListe}
+                    liste={seriesListe}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </section>
+        <section title='Ma liste de série' className='films a-venir'>
+          <div className='container-narrow'>
+            <h2>Ma liste de séries</h2>
+            <div className='container-films'>
+              {seriesListe.slice(0, 7).map(item => {
+                return (
+                  <SeriesListe
+                    key={item.id}
+                    item={item}
+                    seriesListe={seriesListe}
+                    setSeriesListe={setSeriesListe}
+                  />
+                );
               })}
             </div>
           </div>

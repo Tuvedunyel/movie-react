@@ -36,15 +36,16 @@ function App() {
       "popularSeries"
     );
 
+
     if (localStorage.getItem("liste")) {
       setListe(JSON.parse(localStorage.getItem("liste")));
     }
+
   }, []);
 
-  useEffect( () => {
-    localListe()
-
-  }, [liste])
+  useEffect(() => {
+    localListe();
+  }, [liste]);
 
   const fetchApi = (api, setter, storeData) => {
     if (localStorage.getItem(storeData)) {
