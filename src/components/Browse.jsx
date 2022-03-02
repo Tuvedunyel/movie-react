@@ -1,7 +1,7 @@
 import Header from "../layout/Header";
 import { motion } from "framer-motion";
 
-function Browse() {
+const Browse = () => {
   const pageVariants = {
     initial: {
       opacity: 0,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function SeriesListe(props) {
+const SeriesListe = (props) => {
 
     const [isOpen, setIsOpen] = useState(false);
 

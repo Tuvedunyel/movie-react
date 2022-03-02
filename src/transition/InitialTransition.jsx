@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function InitialTransition() {
+const InitialTransition = () => {
   const blackBox = {
     initial: {
       height: "100vh",

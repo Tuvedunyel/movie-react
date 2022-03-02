@@ -1,4 +1,4 @@
-function Button(props) {
+const Button = (props) => {
 
   return (
     <>

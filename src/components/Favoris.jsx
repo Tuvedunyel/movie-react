@@ -5,7 +5,7 @@ import MoviesListe from "./MoviesListe";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion"
 
-function Favoris() {
+const Favoris = () => {
   const [liste, setListe] = useState([]);
   const [seriesListe, setSeriesListe] = useState([]);
   const [moviesListe, setMoviesListe] = useState([]);

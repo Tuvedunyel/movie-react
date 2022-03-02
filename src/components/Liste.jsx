@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Liste(props) {
+const Liste = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleRemover = () => {

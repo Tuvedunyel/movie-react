@@ -6,7 +6,7 @@ import Card from "./layout/Card";
 import Liste from "./components/Liste";
 import InitialTransition from "./transition/InitialTransition";
 
-function App() {
+const App = () => {
   const [popular, setPopular] = useState([]);
   const [series, setSeries] = useState([]);
   const [liste, setListe] = useState([]);

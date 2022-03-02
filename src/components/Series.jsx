@@ -5,7 +5,7 @@ import Header from "../layout/Header";
 import { motion } from "framer-motion";
 import SeriesListe from "./SeriesListe";
 
-function Series() {
+const Series = () => {
   const [popular, setPopular] = useState([]);
   const [bestRated, setBestRated] = useState([]);
   const [onAirShow, setOnAirShow] = useState([]);

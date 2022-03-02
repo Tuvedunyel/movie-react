@@ -5,7 +5,7 @@ import Header from "../layout/Header";
 import MoviesListe from "./MoviesListe";
 import { motion } from "framer-motion";
 
-function Movies() {
+const Movies = () => {
   const [popular, setPopular] = useState([]);
   const [bestRated, setBestRated] = useState([]);
   const [upComing, setUpComing] = useState([]);
@@ -48,6 +48,9 @@ function Movies() {
       setOnCinema,
       "onCinemaMovies"
     );
+    if (window.localStorage.moviesListe) {
+      setMoviesListe(JSON.parse(window.localStorage.moviesListe));
+    }
   }, []);
 
   useEffect(() => {
@@ -56,16 +59,16 @@ function Movies() {
 
   const localMoviesListe = () => {
     if (moviesListe.length > 0) {
-      localStorage.setItem("moviesListe", JSON.stringify(moviesListe));
+      window.localStorage.moviesListe = JSON.stringify(moviesListe);
     }
   };
 
   const fetchApi = (api, setter, storeData) => {
-    if (localStorage.getItem(storeData)) {
-      setter(JSON.parse(localStorage.getItem(storeData)));
+    if (window.localStorage.storeData) {
+      setter(JSON.parse(window.localStorage.storeData));
     }
     axios.get(api).then(res => {
-      localStorage.setItem(storeData, JSON.stringify(res.data.results));
+      window.localStorage.storeData = JSON.stringify(res.data.results);
       setter(res.data.results);
     });
   };
@@ -151,7 +154,7 @@ function Movies() {
           <div className='container-narrow'>
             <h2>Mes films</h2>
             <div className='container-films'>
-              {moviesListe.slice(0, 7).map(item => {
+              {moviesListe.map(item => {
                 return (
                   <MoviesListe
                     key={item.id}

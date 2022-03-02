@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function MoviesListe(props) {
+const MoviesListe = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleRemover = () => {

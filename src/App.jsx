@@ -6,7 +6,7 @@ import Movies from "./components/Movies";
 import Series from "./components/Series";
 import Home from "./Home";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <AnimatePresence exitBeforeEnter>
