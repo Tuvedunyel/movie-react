@@ -72,7 +72,7 @@ function App() {
         variants={pageVariants}
       >
         <Header />
-        <section title='Populaire' className='films'>
+        <section id="demo" title='Populaire' className='films'>
           <div className='container-narrow'>
             <h2>Films populaire</h2>
             <div className='container-films'>
