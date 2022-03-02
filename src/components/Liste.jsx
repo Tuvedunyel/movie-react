@@ -7,7 +7,7 @@ const Liste = (props) => {
     // Remove item from list
     props.setListe([...props.liste.filter(item => item.id !== props.item.id)]);
     // Remove item from localStorage
-    localStorage.setItem("liste", JSON.stringify(props.liste));
+    window.localStorage.liste = JSON.stringify(props.liste);
   };
 
   return (

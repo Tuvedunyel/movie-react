@@ -10,7 +10,7 @@ const SeriesListe = (props) => {
         ...props.seriesListe.filter(item => item.id !== props.item.id),
       ]);
       // Remove item from localStorage
-      localStorage.setItem("seriesListe", JSON.stringify(props.seriesListe));
+      window.localStorage.seriesListe = JSON.stringify(props.seriesListe);
     };
 
     return (

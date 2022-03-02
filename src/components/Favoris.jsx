@@ -11,14 +11,14 @@ const Favoris = () => {
   const [moviesListe, setMoviesListe] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem("liste")) {
-      setListe(JSON.parse(localStorage.getItem("liste")));
+    if (window.localStorage.liste) {
+      setListe( JSON.parse(window.localStorage.liste) )
     }
-    if (localStorage.getItem("seriesListe")) {
-      setSeriesListe(JSON.parse(localStorage.getItem("seriesListe")));
+    if (window.localStorage.seriesListe) {
+      setSeriesListe( JSON.parse(window.localStorage.seriesListe) )
     }
-    if (localStorage.getItem("moviesListe")) {
-      setMoviesListe(JSON.parse(localStorage.getItem("moviesListe")));
+    if (window.localStorage.moviesListe) {
+      setMoviesListe( JSON.parse(window.localStorage.moviesListe) )
     }
   }, [])
 
@@ -36,12 +36,13 @@ const Favoris = () => {
 
   const localSeriesListe = () => {
     if (seriesListe.length > 0) {
-      localStorage.setItem("seriesListe", JSON.stringify(seriesListe));
+      window.localStorage.seriesListe = JSON.stringify(seriesListe);
     }
   }
   const localMoviesListe = () => {
     if (moviesListe.length > 0) {
-      localStorage.setItem("moviesListe", JSON.stringify(moviesListe));
+      window.localStorage.moviesListe = JSON.stringify(moviesListe);
+
     }
   }
 
@@ -49,7 +50,7 @@ const Favoris = () => {
 
   const localListe = () => {
     if (liste.length > 0) {
-      localStorage.setItem("liste", JSON.stringify(liste));
+      window.localStorage.liste = JSON.stringify(liste);
     }
   };
 

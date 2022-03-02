@@ -36,11 +36,9 @@ const App = () => {
       "popularSeries"
     );
 
-
-    if (localStorage.getItem("liste")) {
-      setListe(JSON.parse(localStorage.getItem("liste")));
+    if (window.localStorage.liste) {
+      setListe(JSON.parse(window.localStorage.liste));
     }
-
   }, []);
 
   useEffect(() => {
@@ -48,18 +46,18 @@ const App = () => {
   }, [liste]);
 
   const fetchApi = (api, setter, storeData) => {
-    if (localStorage.getItem(storeData)) {
-      setter(JSON.parse(localStorage.getItem(storeData)));
+    if (window.localStorage.storeData) {
+      setter(JSON.parse(window.localStorage.storeData));
     }
     axios.get(api).then(res => {
-      localStorage.setItem(storeData, JSON.stringify(res.data.results));
+      window.localStorage.storeData = JSON.stringify(res.data.results);
       setter(res.data.results);
     });
   };
 
   const localListe = () => {
     if (liste.length > 0) {
-      localStorage.setItem("liste", JSON.stringify(liste));
+      window.localStorage.liste = JSON.stringify(liste);
     }
   };
 
@@ -72,7 +70,7 @@ const App = () => {
         variants={pageVariants}
       >
         <Header />
-        <section id="demo" title='Populaire' className='films'>
+        <section id='demo' title='Populaire' className='films'>
           <div className='container-narrow'>
             <h2>Films populaire</h2>
             <div className='container-films'>
@@ -127,6 +125,6 @@ const App = () => {
       <InitialTransition />
     </>
   );
-}
+};
 
 export default App;

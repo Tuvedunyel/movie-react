@@ -45,8 +45,8 @@ const Series = () => {
       "onAirShow"
     );
 
-    if (localStorage.getItem("seriesListe")) {
-      setSeriesListe(JSON.parse(localStorage.getItem("seriesListe")));
+    if (window.localStorage.seriesListe) {
+      setSeriesListe(JSON.parse(window.localStorage.seriesListe));
     }
   }, []);
 
@@ -55,18 +55,18 @@ const Series = () => {
   }, [seriesListe]);
 
   const fetchApi = (api, setter, storeData) => {
-    if (localStorage.getItem(storeData)) {
-      setter(JSON.parse(localStorage.getItem(storeData)));
+    if (window.localStorage.storeData) {
+      setter(JSON.parse(window.localStorage.storeData));
     }
     axios.get(api).then(res => {
-      localStorage.setItem(storeData, JSON.stringify(res.data.results));
+      window.localStorage.storeData = JSON.stringify(res.data.results);
       setter(res.data.results);
     });
   };
 
   const localSeriesListe = () => {
     if (seriesListe.length > 0) {
-      localStorage.setItem("seriesListe", JSON.stringify(seriesListe));
+      window.localStorage.seriesListe = JSON.stringify(seriesListe);
     }
   };
 
@@ -134,7 +134,7 @@ const Series = () => {
           <div className='container-narrow'>
             <h2>Mes séries</h2>
             <div className='container-films'>
-              {seriesListe.slice(0, 7).map(item => {
+              {seriesListe.map(item => {
                 return (
                   <SeriesListe
                     key={item.id}
@@ -150,6 +150,6 @@ const Series = () => {
       </div>
     </motion.div>
   );
-}
+};
 
 export default Series;

@@ -9,7 +9,7 @@ const MoviesListe = (props) => {
       ...props.moviesListe.filter(item => item.id !== props.item.id),
     ]);
     // Remove item from localStorage
-    localStorage.setItem("moviesListe", JSON.stringify(props.moviesListe));
+    window.localStorage.moviesListe = JSON.stringify(props.moviesListe);
   };
 
   return (
