@@ -66,7 +66,7 @@ const Card = (props) => {
           onClick={() => setIsOpen(!isOpen)}
         >
           <img
-            src={`https://image.tmdb.org/t/p/w500${props.data.poster_path}`}
+            src={props.data.poster_path ? `https://image.tmdb.org/t/p/w500${props.data.poster_path}` : './src/img/poster.jpg'}
             alt={props.data.title}
           />
           <span className='screen-reader-text'>{props.data.title}</span>
